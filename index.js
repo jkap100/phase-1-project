@@ -28,15 +28,17 @@ const makeImages = (shows) => {
       let description = document.createElement("p");
       let network = document.createElement("p");
       let runtime = document.createElement("p");
+      const scoreObj = result.score * 100;
+      const score = scoreObj.toFixed(1);
 
       movieTitle.innerText = `Title: ${result.show.name}`;
-      movieRating.textContent = `Rating: ${result.score}`;
+      movieRating.textContent = `Rating: ${score}`;
       console.log(movieRating);
 
       newImg.src = result.show.image.medium;
       originalImg = result.show.image.original;
       description.innerHTML = `${result.show.summary}`;
-      runtime.textContent = `Runtime: ${result.show.runtime}`;
+      runtime.textContent = `Runtime: ${result.show.runtime} minutes`;
 
       //   movieDiv.append(movieTitle);
       movieDiv.append(movieSpan);
@@ -56,6 +58,7 @@ function handleSelectMovie(e, movieSpan, originalImg, description, runtime) {
   console.log(movieSpan);
 
   const commentForm = document.createElement("form");
+  const showSearch = document.querySelector("#show-search");
 
   let image = document.querySelector("img");
 
