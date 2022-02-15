@@ -1,13 +1,10 @@
 const form = document.querySelector("#searchForm");
 const movieDiv = document.querySelector("#movie-list");
-const clearForm = document.querySelector("#clear-form");
+const clearFormBtn = document.querySelector("#clear-form");
 const commentDiv = document.querySelector("#comment-div");
 const likesDiv = document.querySelector("#likes-div");
 
-// const likes = document.querySelector("#like-count");
-// const likesBtn = document.querySelector("#like-button");
-
-clearForm.addEventListener("click", () => {
+clearFormBtn.addEventListener("click", () => {
   movieDiv.innerHTML = "";
   commentDiv.innerHTML = "";
   likesDiv.innerHTML = "";
@@ -20,10 +17,7 @@ form.addEventListener("submit", async function (e) {
     `https://api.tvmaze.com/search/shows?q=${searchTerm}`
   );
   makeImages(res.data);
-  // console.log(res.data[0].show.image.medium);
-  // const newImg = document.createElement('IMG');
-  // newImg.src = res.data[0].show.image.medium;
-  // document.body.append(newImg)
+
   form.elements.query.value = "";
 });
 
@@ -65,38 +59,49 @@ const makeImages = (shows) => {
 
 //**Handlers */
 function handleSelectMovie(e, movieSpan, originalImg, description, runtime) {
-  // console.log(e);
-  // console.log(movieSpan);
-  //**Comment Form */
   const commentForm = document.createElement("form");
   const showSearch = document.querySelector("#show-search");
   let image = document.querySelector("img");
-  const likes = document.createElement("form");
-
-  //**Likes button */
+  const likes = document.createElement("span");
 
   movieDiv.innerHTML = "";
 
   movieDiv.append(movieSpan);
-
   movieSpan.append(description, runtime);
 
   image.src = originalImg;
 
+  likes.id = "likes";
   likes.innerHTML = `  
-  <div class="likes-section">
-  <span id="like-count" class="likes">${0} likes</span>
-  <button id="like-button" class="like-button">♥</button>
-  </div>`;
+      <div class="likes-section">
+      <span id="like-count" class="likes">${0} likes</span>
+
+      <button type="click" id="like-button" class="like-button">♥</button>
+      </div>`;
 
   commentForm.id = "comment-form";
   commentForm.innerHTML = `
       <input type="text" placeholder="Add comment"/>
-      <button id="comment-btn"/>Add Comment</button>
+      <button type="submit" id="comment-btn"/>Add Comment</button>
       <ul id="comment-list"></ul>
   `;
+
   likesDiv.append(likes);
   commentDiv.append(commentForm);
+
+  likeBtn = document.querySelector("#like-button");
+
+  likeBtn.addEventListener("click", handleLikes);
+  commentForm.addEventListener("submit", handleNewComment);
+}
+
+function handleLikes() {
+  console.log("test");
+}
+
+function handleNewComment(e) {
+  e.preventDefault();
+  console.log(e);
 }
 
 // likesBtn.addEventListener("click", incrementLikes);
