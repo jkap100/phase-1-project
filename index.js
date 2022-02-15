@@ -81,3 +81,17 @@ function handleSelectMovie(e, movieSpan, originalImg, description, runtime) {
 //     count++
 //     likes.innerText = count + ' likes'
 // }
+
+// // Comments
+// const commForm = document.querySelector('#comment-form')
+// const cmntBtn = document.querySelector('#comment-btn')
+
+// cmntBtn.addEventListener('submit', addComm)
+
+// function addComm(e) {
+//     e.preventDefault()
+//     const content = e.target.comment.value
+//     const imageId = Number(e.target.dataset.imgId)
+//     const newComment = { imageId, content}
+
+// }
