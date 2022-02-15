@@ -1,9 +1,11 @@
+//**Selectors */
 const form = document.querySelector("#searchForm");
 const movieDiv = document.querySelector("#movie-list");
 const clearFormBtn = document.querySelector("#clear-form");
 const commentDiv = document.querySelector("#comment-div");
 const likesDiv = document.querySelector("#likes-div");
 
+//**Listeners */
 clearFormBtn.addEventListener("click", () => {
   movieDiv.innerHTML = "";
   commentDiv.innerHTML = "";
@@ -21,9 +23,13 @@ form.addEventListener("submit", async function (e) {
   form.elements.query.value = "";
 });
 
+//**Renderings  */
 const makeImages = (shows) => {
   // console.log(shows);
   movieDiv.innerHTML = "";
+  commentDiv.innerHTML = "";
+  likesDiv.innerHTML = "";
+
   for (let result of shows) {
     if (result.show.image) {
       const movieSpan = document.createElement("span");
@@ -63,11 +69,18 @@ function handleSelectMovie(e, movieSpan, originalImg, description, runtime) {
   const showSearch = document.querySelector("#show-search");
   let image = document.querySelector("img");
   const likes = document.createElement("span");
+  let minutes = runtime.textContent.split(" ")[1];
 
   movieDiv.innerHTML = "";
 
   movieDiv.append(movieSpan);
-  movieSpan.append(description, runtime);
+
+  // console.log(minutes);
+  if (minutes == "null") {
+    movieSpan.append(description);
+  } else {
+    movieSpan.append(description, runtime);
+  }
 
   image.src = originalImg;
 
@@ -114,11 +127,3 @@ function handleNewComment(e) {
 
   commentUl.appendChild(commentLi);
 }
-
-// likesBtn.addEventListener("click", incrementLikes);
-
-// function incrementLikes() {
-//   let count = Number(likes.textContent.split(" ")[0]);
-//   count++;
-//   likes.innerText = count + " likes";
-// }
