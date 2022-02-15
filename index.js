@@ -1,5 +1,11 @@
 const form = document.querySelector("#searchForm");
 const movieDiv = document.querySelector("#movie-list");
+const clearForm = document.querySelector("#clear-form");
+const commentDiv = document.querySelector("#comment-div");
+
+clearForm.addEventListener("click", () => {
+  movieDiv.innerHTML = "";
+});
 
 form.addEventListener("submit", async function (e) {
   e.preventDefault();
@@ -16,7 +22,7 @@ form.addEventListener("submit", async function (e) {
 });
 
 const makeImages = (shows) => {
-  console.log(shows);
+  // console.log(shows);
   movieDiv.innerHTML = "";
   for (let result of shows) {
     if (result.show.image) {
@@ -28,8 +34,8 @@ const makeImages = (shows) => {
       let description = document.createElement("p");
       let network = document.createElement("p");
       let runtime = document.createElement("p");
-      const scoreObj = result.score * 100;
-      const score = scoreObj.toFixed(1);
+      const rawScore = result.score * 100;
+      const score = rawScore.toFixed(1);
 
       movieTitle.innerText = `Title: ${result.show.name}`;
       movieRating.textContent = `Rating: ${score}`;
@@ -40,7 +46,6 @@ const makeImages = (shows) => {
       description.innerHTML = `${result.show.summary}`;
       runtime.textContent = `Runtime: ${result.show.runtime} minutes`;
 
-      //   movieDiv.append(movieTitle);
       movieDiv.append(movieSpan);
       movieSpan.append(newImg, movieTitle);
       movieTitle.append(movieRating);
@@ -54,12 +59,11 @@ const makeImages = (shows) => {
 
 //**Handlers */
 function handleSelectMovie(e, movieSpan, originalImg, description, runtime) {
-  console.log(e);
-  console.log(movieSpan);
+  // console.log(e);
+  // console.log(movieSpan);
 
   const commentForm = document.createElement("form");
   const showSearch = document.querySelector("#show-search");
-
   let image = document.querySelector("img");
 
   movieDiv.innerHTML = "";
@@ -68,4 +72,13 @@ function handleSelectMovie(e, movieSpan, originalImg, description, runtime) {
   movieSpan.append(description, runtime);
 
   image.src = originalImg;
+
+  commentForm.id = "comment-form";
+  commentForm.innerHTML = `
+      <input type="text" placeholder="Add comment"/>
+      <button id="comment-btn"/>Add Comment</button>
+      <ul id="comment-list"></ul>
+  `;
+
+  commentDiv.append(commentForm);
 }
