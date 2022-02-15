@@ -109,7 +109,7 @@ function handleSelectMovie(e, movieSpan, originalImg, description, runtime) {
 }
 
 function handleLikes() {
-  console.log("test");
+  // console.log("test");
   const likes = document.querySelector("#like-count");
   let count = Number(likes.textContent.split(" ")[0]);
   count++;
@@ -126,4 +126,6 @@ function handleNewComment(e) {
   commentLi.textContent = e.target.newComment.value;
 
   commentUl.appendChild(commentLi);
+
+  e.target.reset();
 }
