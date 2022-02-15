@@ -1,5 +1,16 @@
+//**Selectors */
 const form = document.querySelector("#searchForm");
 const movieDiv = document.querySelector("#movie-list");
+const clearFormBtn = document.querySelector("#clear-form");
+const commentDiv = document.querySelector("#comment-div");
+const likesDiv = document.querySelector("#likes-div");
+
+//**Listeners */
+clearFormBtn.addEventListener("click", () => {
+  movieDiv.innerHTML = "";
+  commentDiv.innerHTML = "";
+  likesDiv.innerHTML = "";
+});
 
 form.addEventListener("submit", async function (e) {
   e.preventDefault();
@@ -8,39 +19,39 @@ form.addEventListener("submit", async function (e) {
     `https://api.tvmaze.com/search/shows?q=${searchTerm}`
   );
   makeImages(res.data);
-  // console.log(res.data[0].show.image.medium);
-  // const newImg = document.createElement('IMG');
-  // newImg.src = res.data[0].show.image.medium;
-  // document.body.append(newImg)
+
   form.elements.query.value = "";
 });
 
+//**Renderings  */
 const makeImages = (shows) => {
-  console.log(shows);
+  // console.log(shows);
   movieDiv.innerHTML = "";
+  commentDiv.innerHTML = "";
+  likesDiv.innerHTML = "";
+
   for (let result of shows) {
     if (result.show.image) {
       const movieSpan = document.createElement("span");
       const newImg = document.createElement("img");
-      const movieTitle = document.createElement("p");
-      const movieRating = document.createElement("p");
+      const movieTitle = document.createElement("h4");
+      const movieRating = document.createElement("h5");
       let originalImg = document.createElement("img");
       let description = document.createElement("p");
       let network = document.createElement("p");
       let runtime = document.createElement("p");
-      const scoreObj = result.score * 100;
-      const score = scoreObj.toFixed(1);
+      const rawScore = result.score * 100;
+      const score = rawScore.toFixed(1);
 
       movieTitle.innerText = `Title: ${result.show.name}`;
       movieRating.textContent = `Rating: ${score}`;
-      console.log(movieRating);
+      // console.log(movieRating);
 
       newImg.src = result.show.image.medium;
       originalImg = result.show.image.original;
       description.innerHTML = `${result.show.summary}`;
       runtime.textContent = `Runtime: ${result.show.runtime} minutes`;
 
-      //   movieDiv.append(movieTitle);
       movieDiv.append(movieSpan);
       movieSpan.append(newImg, movieTitle);
       movieTitle.append(movieRating);
@@ -54,44 +65,67 @@ const makeImages = (shows) => {
 
 //**Handlers */
 function handleSelectMovie(e, movieSpan, originalImg, description, runtime) {
-  console.log(e);
-  console.log(movieSpan);
-
   const commentForm = document.createElement("form");
   const showSearch = document.querySelector("#show-search");
-
   let image = document.querySelector("img");
+  const likes = document.createElement("span");
+  let minutes = runtime.textContent.split(" ")[1];
 
   movieDiv.innerHTML = "";
 
   movieDiv.append(movieSpan);
-  movieSpan.append(description, runtime);
+
+  // console.log(minutes);
+  if (minutes == "null") {
+    movieSpan.append(description);
+  } else {
+    movieSpan.append(description, runtime);
+  }
 
   image.src = originalImg;
+
+  likes.id = "likes";
+  likes.innerHTML = `  
+      <div class="likes-section">
+      <span id="like-count" class="likes">${0} likes</span>
+      <button type="click" id="like-button" class="btn btn-secondary">♥</button>
+      </div>`;
+
+  commentForm.id = "comment-form";
+  commentForm.innerHTML = `
+      <h4>Comments:</h4>
+      <ul id="comment-list"></ul>
+      <input name="newComment" type="text" placeholder="Add comment"/>
+      <button type="submit" id="comment-btn"  class="btn btn-secondary"/>Add Comment</button>
+   `;
+
+  likesDiv.append(likes);
+  commentDiv.append(commentForm);
+
+  likeBtn = document.querySelector("#like-button");
+
+  likeBtn.addEventListener("click", handleLikes);
+  commentForm.addEventListener("submit", handleNewComment);
 }
 
-// // Likes
-// const likes = document.querySelector('#like-count')
-// const likesBtn = document.querySelector('#like-button')
+function handleLikes() {
+  // console.log("test");
+  const likes = document.querySelector("#like-count");
+  let count = Number(likes.textContent.split(" ")[0]);
+  count++;
+  likes.innerText = count + " likes";
+}
 
-// likesBtn.addEventListener('click', incrementLikes)
+function handleNewComment(e) {
+  e.preventDefault();
+  // console.log(e);
 
-// function incrementLikes(){
-//     let count = Number(likes.textContent.split(" ")[0])
-//     count++
-//     likes.innerText = count + ' likes'
-// }
+  const commentUl = document.querySelector("#comment-list");
+  const commentLi = document.createElement("li");
 
-// // Comments
-// const commForm = document.querySelector('#comment-form')
-// const cmntBtn = document.querySelector('#comment-btn')
+  commentLi.textContent = e.target.newComment.value;
 
-// cmntBtn.addEventListener('submit', addComm)
+  commentUl.appendChild(commentLi);
 
-// function addComm(e) {
-//     e.preventDefault()
-//     const content = e.target.comment.value
-//     const imageId = Number(e.target.dataset.imgId)
-//     const newComment = { imageId, content}
-
-// }
+  e.target.reset();
+}
