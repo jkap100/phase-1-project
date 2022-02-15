@@ -28,8 +28,8 @@ const makeImages = (shows) => {
     if (result.show.image) {
       const movieSpan = document.createElement("span");
       const newImg = document.createElement("img");
-      const movieTitle = document.createElement("p");
-      const movieRating = document.createElement("p");
+      const movieTitle = document.createElement("h4");
+      const movieRating = document.createElement("h5");
       let originalImg = document.createElement("img");
       let description = document.createElement("p");
       let network = document.createElement("p");
@@ -39,7 +39,7 @@ const makeImages = (shows) => {
 
       movieTitle.innerText = `Title: ${result.show.name}`;
       movieRating.textContent = `Rating: ${score}`;
-      console.log(movieRating);
+      // console.log(movieRating);
 
       newImg.src = result.show.image.medium;
       originalImg = result.show.image.original;
@@ -75,16 +75,16 @@ function handleSelectMovie(e, movieSpan, originalImg, description, runtime) {
   likes.innerHTML = `  
       <div class="likes-section">
       <span id="like-count" class="likes">${0} likes</span>
-
       <button type="click" id="like-button" class="like-button">♥</button>
       </div>`;
 
   commentForm.id = "comment-form";
   commentForm.innerHTML = `
-      <input type="text" placeholder="Add comment"/>
-      <button type="submit" id="comment-btn"/>Add Comment</button>
+      <h4>Comments:</h4>
       <ul id="comment-list"></ul>
-  `;
+      <input name="newComment" type="text" placeholder="Add comment"/>
+      <button type="submit" id="comment-btn"/>Add Comment</button>
+   `;
 
   likesDiv.append(likes);
   commentDiv.append(commentForm);
@@ -97,11 +97,22 @@ function handleSelectMovie(e, movieSpan, originalImg, description, runtime) {
 
 function handleLikes() {
   console.log("test");
+  const likes = document.querySelector("#like-count");
+  let count = Number(likes.textContent.split(" ")[0]);
+  count++;
+  likes.innerText = count + " likes";
 }
 
 function handleNewComment(e) {
   e.preventDefault();
-  console.log(e);
+  // console.log(e);
+
+  const commentUl = document.querySelector("#comment-list");
+  const commentLi = document.createElement("li");
+
+  commentLi.textContent = e.target.newComment.value;
+
+  commentUl.appendChild(commentLi);
 }
 
 // likesBtn.addEventListener("click", incrementLikes);
