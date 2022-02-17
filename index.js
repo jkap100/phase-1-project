@@ -71,9 +71,10 @@ function handleSelectMovie(e, movieSpan, originalImg, description, runtime) {
   let image = document.querySelector("img");
   const likes = document.createElement("span");
   let minutes = runtime.textContent.split(" ")[1];
-
+  
   movieDiv.innerHTML = "";
 
+  // image.classList.add("d-flex justify-content-evenly")
   movieDiv.append(movieSpan);
 
   // console.log(minutes);
