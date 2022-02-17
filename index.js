@@ -34,14 +34,15 @@ const makeImages = (shows) => {
     if (result.show.image) {
       const movieSpan = document.createElement("span");
       const newImg = document.createElement("img");
-      const movieTitle = document.createElement("h4");
-      const movieRating = document.createElement("h5");
+      const movieTitle = document.createElement("h5");
+      const movieRating = document.createElement("h6");
       let originalImg = document.createElement("img");
       let description = document.createElement("p");
       let network = document.createElement("p");
       let runtime = document.createElement("p");
       const rawScore = result.score * 100;
       const score = rawScore.toFixed(1);
+      movieSpan.classList.add("mx-1")
 
       movieTitle.innerText = `Title: ${result.show.name}`;
       movieRating.textContent = `Rating: ${score}`;
