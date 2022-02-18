@@ -121,7 +121,6 @@ function handleLikes() {
 function handleNewComment(e) {
   e.preventDefault();
   // console.log(e);
-
   const commentUl = document.querySelector("#comment-list");
   const commentLi = document.createElement("li");
 
