@@ -37,35 +37,37 @@ const makeImages = (shows) => {
       const movieTitle = document.createElement("h5");
       const movieRating = document.createElement("h6");
       let originalImg = document.createElement("img");
-      let description = document.createElement("p");
-      let network = document.createElement("p");
       let runtime = document.createElement("p");
+      runtime.classList = `runtime`
+      let description = document.createElement("p");
+      description.classList = `desc`
+      let network = document.createElement("p");
       const rawScore = result.score * 100;
       const score = rawScore.toFixed(1);
       movieSpan.classList.add("mx-1")
 
-      movieTitle.innerText = `Title: ${result.show.name}`;
+      movieTitle.innerText = `${result.show.name}`;
       movieRating.textContent = `Rating: ${score}`;
       // console.log(movieRating);
 
       newImg.src = result.show.image.medium;
       originalImg = result.show.image.original;
-      description.innerHTML = `${result.show.summary}`;
       runtime.textContent = `Runtime: ${result.show.runtime} minutes`;
+      description.innerHTML = `${result.show.summary}`;
 
       movieDiv.append(movieSpan);
       movieSpan.append(newImg, movieTitle);
       movieTitle.append(movieRating);
 
       newImg.addEventListener("click", (e) =>
-        handleSelectMovie(e, movieSpan, originalImg, description, runtime)
+        handleSelectMovie(e, movieSpan, originalImg, runtime, description)
       );
     }
   }
 };
 
 //**Handlers */
-function handleSelectMovie(e, movieSpan, originalImg, description, runtime) {
+function handleSelectMovie(e, movieSpan, originalImg, runtime, description) {
   const commentForm = document.createElement("form");
   const showSearch = document.querySelector("#show-search");
   let image = document.querySelector("img");
@@ -81,7 +83,7 @@ function handleSelectMovie(e, movieSpan, originalImg, description, runtime) {
   if (minutes == "null") {
     movieSpan.append(description);
   } else {
-    movieSpan.append(description, runtime);
+    movieSpan.append(runtime, description);
   }
 
   image.src = originalImg;

@@ -31,17 +31,17 @@
 }
 
   .movies{
-    text-align: center;
+    /* text-align: center; */
     color: #F5F9E9;
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
+    /* align-items: center; */
   }
 
   span {
     padding: 2vh;
-    text-align: wrap;
-    align-items: center
+    /* text-align: center; */
+    /* align-items: center; */
   }
 
   span img:hover {
@@ -66,7 +66,7 @@
   }
   
   .comments {
-      color: #C2C1A5
+      color: #C2C1A5;
   }
 
   li {
@@ -84,4 +84,13 @@
     background-color: #1D201D;    /* color of the scroll thumb */
     border-radius: 20px;       /* roundness of the scroll thumb */
     border: 3px solid #515751;  /* creates padding around scroll thumb */
+  }
+
+  .runtime {
+    color: #F5F9E9;
+    text-decoration: underline
+  }
+
+  .desc {
+    overflow-wrap: anywhere;
   }
