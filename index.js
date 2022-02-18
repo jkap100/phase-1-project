@@ -38,13 +38,13 @@ const makeImages = (shows) => {
       const movieRating = document.createElement("h6");
       let originalImg = document.createElement("img");
       let runtime = document.createElement("p");
-      runtime.classList = `runtime`
+      runtime.classList = `runtime`;
       let description = document.createElement("p");
-      description.classList = `desc`
+      description.classList = `desc`;
       let network = document.createElement("p");
       const rawScore = result.score * 100;
       const score = rawScore.toFixed(1);
-      movieSpan.classList.add("mx-1")
+      movieSpan.classList.add("mx-1");
 
       movieTitle.innerText = `${result.show.name}`;
       movieRating.textContent = `Rating: ${score}`;
@@ -59,8 +59,11 @@ const makeImages = (shows) => {
       movieSpan.append(newImg, movieTitle);
       movieTitle.append(movieRating);
 
-      newImg.addEventListener("click", (e) =>
-        handleSelectMovie(e, movieSpan, originalImg, runtime, description), {once: true}
+      newImg.addEventListener(
+        "click",
+        (e) =>
+          handleSelectMovie(e, movieSpan, originalImg, runtime, description),
+        { once: true }
       );
     }
   }
@@ -73,7 +76,7 @@ function handleSelectMovie(e, movieSpan, originalImg, runtime, description) {
   let image = document.querySelector("img");
   const likes = document.createElement("span");
   let minutes = runtime.textContent.split(" ")[1];
-  
+
   movieDiv.innerHTML = "";
 
   // image.classList.add("d-flex justify-content-evenly")
