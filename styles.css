@@ -1,0 +1,97 @@
+* {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif, Helvetica, sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  padding: 20px;
+  text-align: center;
+  background-color: #515751;
+}
+
+h1 {
+  color: #c2c1a5;
+  font-family: Perpetua, Baskerville, Big Caslon, Palatino Linotype, Palatino,
+    URW Palladio L, Nimbus Roman No9 L, serif;
+  font-size: 400%;
+}
+
+.btn {
+  background-color: #36453b;
+  color: #f5f9e9;
+  font-family: Optima, Segoe, Segoe UI, Candara, Calibri, Arial, sans-serif;
+  font-size: 100%;
+  border: none;
+  transition: color 300ms;
+  cursor: pointer;
+}
+
+button:hover {
+  filter: drop-shadow(0 0 0.75rem #c2c1a5);
+}
+
+.movies {
+  /* text-align: center; */
+  color: #f5f9e9;
+  display: flex;
+  flex-wrap: wrap;
+  /* align-items: center; */
+}
+
+span {
+  padding: 2vh;
+  /* text-align: center; */
+  /* align-items: center; */
+}
+
+span img:hover {
+  filter: drop-shadow(0 0 0.75rem #c2c1a5);
+}
+
+h5 {
+  font-size: 120%;
+  text-decoration: underline;
+}
+
+h6 {
+  font-size: 80%;
+}
+
+p {
+  color: #c2c1a5;
+}
+
+.likes {
+  color: #1d201d;
+}
+
+.comments {
+  color: #c2c1a5;
+}
+
+li {
+  list-style-type: none;
+}
+body::-webkit-scrollbar {
+  width: 12px; /* width of the entire scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+  background: #515751; /* color of the tracking area */
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #1d201d; /* color of the scroll thumb */
+  border-radius: 20px; /* roundness of the scroll thumb */
+  border: 3px solid #515751; /* creates padding around scroll thumb */
+}
+
+.runtime {
+  color: #f5f9e9;
+  text-decoration: underline;
+}
+
+.desc {
+  overflow-wrap: anywhere;
+}
