@@ -41,6 +41,7 @@
   span {
     padding: 2vh;
     text-align: wrap;
+    align-items: center
   }
 
   span img:hover {
