@@ -44,7 +44,6 @@ const makeImages = (shows) => {
       let network = document.createElement("p");
       const rawScore = result.score * 100;
       const score = rawScore.toFixed(1);
-      movieSpan.classList.add("mx-1");
 
       movieTitle.innerText = `${result.show.name}`;
       movieRating.textContent = `Rating: ${score}`;
@@ -94,7 +93,7 @@ function handleSelectMovie(e, movieSpan, originalImg, runtime, description) {
   likes.id = "likes";
   likes.innerHTML = `  
       <div class="likes-section">
-      <span id="like-count" class="likes">${0} likes</span>
+      <span id="like-count" class="likes">${0} Likes</span>
       <button type="click" id="like-button" class="btn btn-secondary">♥</button>
       </div>`;
 

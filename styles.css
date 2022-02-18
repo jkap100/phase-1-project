@@ -36,7 +36,7 @@ button:hover {
   color: #f5f9e9;
   display: flex;
   flex-wrap: wrap;
-  /* align-items: center; */
+  justify-content: center;
 }
 
 span {
@@ -47,6 +47,10 @@ span {
 
 span img:hover {
   filter: drop-shadow(0 0 0.75rem #c2c1a5);
+}
+
+h4 {
+  justify-content: center;
 }
 
 h5 {
@@ -68,6 +72,7 @@ p {
 
 .comments {
   color: #c2c1a5;
+  justify-content: center;
 }
 
 li {
@@ -92,6 +97,6 @@ body::-webkit-scrollbar-thumb {
   text-decoration: underline;
 }
 
-.desc {
+/* .desc {
   overflow-wrap: anywhere;
-}
+} */
