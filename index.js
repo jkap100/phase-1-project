@@ -60,7 +60,7 @@ const makeImages = (shows) => {
       movieTitle.append(movieRating);
 
       newImg.addEventListener("click", (e) =>
-        handleSelectMovie(e, movieSpan, originalImg, runtime, description)
+        handleSelectMovie(e, movieSpan, originalImg, runtime, description), {once: true}
       );
     }
   }
